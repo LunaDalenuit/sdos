@@ -1,4 +1,4 @@
-# TSDOS - IBM PC 5150 (1981 Spec)
+# SDOS - IBM PC 5150 (1981 Spec)
 # Target: Intel 8088 @ 4.77 MHz, 64KiB RAM, 160KiB 5.25" Floppy
 
 ASM      := nasm
