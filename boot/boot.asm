@@ -98,6 +98,6 @@ msg_read_ok     db "Floppy Controller ready.", 0x0D, 0x0A, 0x0D, 0x0A, 0
 msg_read_fail   db "Critical: Drive Hardware failed.", 0x0D, 0x0A, 0
 BOOT_DRIVE      db 0        ; Hold BIOS boot drive ID (typically 0x00)
 
-; --- Bootsector Padding & Signature
+; --- Bootsector Padding & Signature ---
 times 510-($-$$) db 0   ; Pad sector out to 510 bytes
 dw 0xAA55               ; IBM PC boot signature

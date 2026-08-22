@@ -12,22 +12,16 @@ kernel_main:
 
     ; Print SDOS Banner
     mov si, msg_banner
-
-print_loop:
-    lodsb           ; Load byte from [DS:SI] into AL
-    or al, al       ; Check for null terminator
-    jz kernel_halt
-    mov ah, 0x0E    ; BIOS TTY output
-    mov bh, 0x00    ; Page 0
-    mov bl, 0x07    ; Light gray on black
-    int 0x10
-    jmp print_loop
+    call kprint
 
 kernel_halt:
     cli
 .loop:
     hlt
     jmp .loop
+
+; --- Kernel Subsystems ---
+%include "kernel/console.asm"
 
 ; --- Data ---
 msg_banner  db "Simple Disk Operating System v1.0", 0x0D, 0x0A
