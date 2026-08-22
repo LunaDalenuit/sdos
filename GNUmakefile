@@ -12,11 +12,13 @@ TARGET   := $(BUILD_DIR)/sdos.img
 
 all: $(TARGET)
 
-$(TARGET): boot/boot.asm
+$(TARGET): boot/boot.asm kernel/kernel.asm
 	@mkdir -p $(BUILD_DIR)
 	$(ASM) $(ASMFLAGS) boot/boot.asm -o $(BUILD_DIR)/boot.bin
+	$(ASM) $(ASMFLAGS) kernel/kernel.asm -o $(BUILD_DIR)/kernel.bin
 	dd if=/dev/zero of=$(TARGET) bs=512 count=320 status=none
-	dd if=$(BUILD_DIR)/boot.bin of=$(TARGET) conv=notrunc status=none
+	dd if=$(BUILD_DIR)/boot.bin of=$(TARGET) bs=512 conv=notrunc status=none
+	dd if=$(BUILD_DIR)/kernel.bin of=$(TARGET) bs=512 seek=1 conv=notrunc status=none
 
 run: all
 	$(EMU) -P .
