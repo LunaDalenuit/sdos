@@ -36,14 +36,17 @@ kcls:
 knewline:
     push ax
     push bx
-    mov ah, 0x0E       ; Carriage Return
-    mov al, 0x0D
+
+    mov ah, 0x0E
+    mov al, 0x0D        ; Carriage Return
     mov bh, 0x00
     mov bl, 0x07
     int 0x10
 
+    mov ah, 0x0E
     mov al, 0x0A       ; Line Feed
     int 0x10
+
     pop bx
     pop ax
     ret
@@ -56,7 +59,6 @@ kgetcursor:
     mov ah, 0x03        ; Subfunction 03h: Read cursor position
     mov bh, 0x00        ; Page 0
     int 0x10
-    pop cx
     pop bx
     pop ax
     ret
@@ -84,9 +86,11 @@ kbackspace:
     mov bl, 0x07
     int 0x10
 
+    mov ah, 0x0E
     mov al, ' '     ; Overwrite character with blank character
     int 0x10
 
+    mov ah, 0x0E
     mov al, 0x08    ; Overwriting the character moves the cursor forward a column, we need to backspace again
     int 0x10
 
