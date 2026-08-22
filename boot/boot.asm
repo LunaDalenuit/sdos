@@ -49,7 +49,7 @@ reset_drive:
 
     ; BIOS INT 13h, AH=02h (Read disk sectors)
     mov ah, 0x02            ; Read sectors subfunction
-    mov al, 1               ; Number of sectors to read
+    mov al, 8               ; Number of sectors to read
     mov ch, 0               ; Cylinder 0
     mov cl, 2               ; Sector 2
     mov dh, 0               ; Head 0
